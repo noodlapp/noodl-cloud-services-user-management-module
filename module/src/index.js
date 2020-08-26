@@ -5,8 +5,10 @@ let userObject; //Noodl.Object not available yet when this line runs, so create 
 
 function updateUserObject() {
 	const user = Parse.User.current();
+	const attributes = user ? user.attributes : {};
+
 	userObject.setAll({
-		...user.attributes,
+		...attributes,
 		userId: user ? user.id : null,
 		authenticated: user ? user.authenticated() : false
 	});
