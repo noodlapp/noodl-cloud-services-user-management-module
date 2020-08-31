@@ -35,8 +35,8 @@
                     {
                         "id": "7f58e9f5-2c11-af7f-ca6b-32f5b754ba22",
                         "type": "Group",
-                        "x": 5.667990989781458,
-                        "y": 131.7148574248774,
+                        "x": 6.667990989781458,
+                        "y": 132.7148574248774,
                         "parameters": {
                             "paddingLeft": {
                                 "value": 16,
@@ -1471,109 +1471,17 @@
         },
         "dbCollections": [
             {
-                "name": "_Role",
+                "name": "test",
                 "type": "cloud",
                 "schema": {
                     "properties": {
-                        "objectId": {
-                            "type": "String"
-                        },
                         "createdAt": {
-                            "type": "Date"
+                            "type": "Date",
+                            "undeletable": true
                         },
                         "updatedAt": {
-                            "type": "Date"
-                        },
-                        "ACL": {
-                            "type": "ACL"
-                        },
-                        "name": {
-                            "type": "String"
-                        },
-                        "users": {
-                            "type": "Relation",
-                            "targetClass": "_User"
-                        },
-                        "roles": {
-                            "type": "Relation",
-                            "targetClass": "_Role"
-                        }
-                    }
-                }
-            },
-            {
-                "name": "_User",
-                "type": "cloud",
-                "schema": {
-                    "properties": {
-                        "objectId": {
-                            "type": "String"
-                        },
-                        "createdAt": {
-                            "type": "Date"
-                        },
-                        "updatedAt": {
-                            "type": "Date"
-                        },
-                        "ACL": {
-                            "type": "ACL"
-                        },
-                        "username": {
-                            "type": "String"
-                        },
-                        "password": {
-                            "type": "String"
-                        },
-                        "email": {
-                            "type": "String"
-                        },
-                        "emailVerified": {
-                            "type": "Boolean"
-                        },
-                        "authData": {
-                            "type": "Object"
-                        },
-                        "skillLevel": {
-                            "type": "String"
-                        }
-                    }
-                }
-            },
-            {
-                "name": "_Session",
-                "type": "cloud",
-                "schema": {
-                    "properties": {
-                        "objectId": {
-                            "type": "String"
-                        },
-                        "createdAt": {
-                            "type": "Date"
-                        },
-                        "updatedAt": {
-                            "type": "Date"
-                        },
-                        "ACL": {
-                            "type": "ACL"
-                        },
-                        "restricted": {
-                            "type": "Boolean"
-                        },
-                        "user": {
-                            "type": "Pointer",
-                            "targetClass": "_User"
-                        },
-                        "installationId": {
-                            "type": "String"
-                        },
-                        "sessionToken": {
-                            "type": "String"
-                        },
-                        "expiresAt": {
-                            "type": "Date"
-                        },
-                        "createdWith": {
-                            "type": "Object"
+                            "type": "Date",
+                            "undeletable": true
                         }
                     }
                 }
