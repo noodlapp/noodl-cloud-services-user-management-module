@@ -32,7 +32,16 @@ function initializeParse(cloudservices) {
 	Parse.initialize(`${workspaceId}-${instanceId}`);
 	Parse.serverURL = endpoint;
 
-	updateUserObject(); //check for cached login
+	const user = Parse.User.current();
+
+	//is there a cached login?
+	if(user) {
+		//fetch user data from local storage
+		updateUserObject(); 
+
+		//and fetch from the backend in case some value has changed
+		user.fetch().then(updateUserObject);
+	}
 }
 
 const SignUp = Noodl.defineNode({
@@ -61,7 +70,11 @@ const SignUp = Noodl.defineNode({
 				});
 
 				const user = new Parse.User();
-				user.set("username", this.inputs.username);
+
+				//Parse requires a username, and email is optional.
+				//if no username is specified, use the email as a username 
+				const username = this.inputs.username ? this.inputs.username : this.inputs.email;
+				user.set("username", username);
 				user.set("password", this.inputs.password);
 				user.set("email", this.inputs.email);
 
