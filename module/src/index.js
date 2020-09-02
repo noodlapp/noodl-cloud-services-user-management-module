@@ -1,6 +1,64 @@
 const Noodl = require('@noodl/noodl-sdk');
 const Parse = require('parse');
 
+const ErrorCodes = {
+    0: "OTHER_CAUSE" ,
+    1: "INTERNAL_SERVER_ERROR",
+    100: "CONNECTION_FAILED",
+    101: "OBJECT_NOT_FOUND",
+    102: "INVALID_QUERY",
+    103: "INVALID_CLASS_NAME",
+    104: "MISSING_OBJECT_ID",
+    105: "INVALID_KEY_NAME",
+    106: "INVALID_POINTER",
+    107: "INVALID_JSON",
+    108: "COMMAND_UNAVAILABLE",
+    109: "NOT_INITIALIZED",
+    111: "INCORRECT_TYPE",
+    112: "INVALID_CHANNEL_NAME",
+    115: "PUSH_MISCONFIGURED",
+    116: "OBJECT_TOO_LARGE",
+    119: "OPERATION_FORBIDDEN",
+    120: "CACHE_MISS",
+    121: "INVALID_NESTED_KEY",
+    122: "INVALID_FILE_NAME",
+    123: "INVALID_ACL",
+    124: "TIMEOUT",
+    125: "INVALID_EMAIL_ADDRESS",
+    126: "MISSING_CONTENT_TYPE",
+    127: "MISSING_CONTENT_LENGTH",
+    128: "INVALID_CONTENT_LENGTH",
+    129: "FILE_TOO_LARGE",
+    130: "FILE_SAVE_ERROR",
+    137: "DUPLICATE_VALUE",
+    139: "INVALID_ROLE_NAME",
+    140: "EXCEEDED_QUOTA",
+    141: "SCRIPT_FAILED",
+    142: "VALIDATION_ERROR",
+    150: "INVALID_IMAGE_DATA",
+    151: "UNSAVED_FILE_ERROR",
+    152: "INVALID_PUSH_TIME_ERROR",
+    153: "FILE_DELETE_ERROR",
+    155: "REQUEST_LIMIT_EXCEEDED",
+    160: "INVALID_EVENT_NAME",
+    200: "USERNAME_MISSING",
+    201: "PASSWORD_MISSING",
+    202: "USERNAME_TAKEN",
+    203: "EMAIL_TAKEN",
+    204: "EMAIL_MISSING",
+    205: "EMAIL_NOT_FOUND",
+    206: "SESSION_MISSING",
+    207: "MUST_CREATE_USER_THROUGH_SIGNUP",
+    208: "ACCOUNT_ALREADY_LINKED",
+    209: "INVALID_SESSION_TOKEN",
+    250: "LINKED_ID_MISSING",
+    251: "INVALID_LINKED_SESSION",
+    252: "UNSUPPORTED_SERVICE",
+    600: "AGGREGATE_ERROR",
+    601: "FILE_READ_ERROR",
+    602: "X_DOMAIN_REQUEST",
+}
+
 let userObject; //Noodl.Object not available yet when this line runs, so create this object later
 
 function updateUserObject() {
@@ -14,7 +72,7 @@ function updateUserObject() {
 	});
 }
 
-function setCustomUserProperty(name, value) {
+function setUserProperty(name, value) {
 	userObject.set(name, value);
 	Parse.User.current().set(name, value);
 }
@@ -49,19 +107,20 @@ const SignUp = Noodl.defineNode({
 	name:'Sign Up',
 	color:'green',
 	inputs:{
-		email: {type: 'string', group: 'User Data'},
-		username: {type: 'string', group: 'User Data'},
-		password: {type: 'string', group: 'User Data'},
+		email: {type: 'string', displayName: 'Email', group: 'User Data'},
+		username: {type: 'string', displayName: 'Username', group: 'User Data'},
+		password: {type: 'string', displayName: 'Password', group: 'User Data'},
 	},
 	outputs: {
-		success: {type: 'signal', group: 'success'},
-		error: {type: 'signal', group: 'error'},
-		errorMessage: {type: 'string', group: 'error'},
-		errorCode: {type: 'string', group: 'error'},
+		success: {type: 'signal', displayName: 'Success', group: 'Success'},
+		error: {type: 'signal', displayName: 'Error',group: 'Error'},
+		errorMessage: {type: 'string', displayName: 'Error Message',group: 'Error'},
+		errorCode: {type: 'string', displayName: 'Error Code',group: 'Error'},
 	},
 	signals: {
 		signup: {
 			displayName: 'Sign Up',
+			group: 'Actions',
 			signal() {
 
 				this.setOutputs({
@@ -77,6 +136,7 @@ const SignUp = Noodl.defineNode({
 				user.set("username", username);
 				user.set("password", this.inputs.password);
 				user.set("email", this.inputs.email);
+				Parse.Error
 
 				user.signUp().then(() => {
 						this.sendSignalOnOutput('success');
@@ -85,7 +145,7 @@ const SignUp = Noodl.defineNode({
 					.catch(error => {
 						this.setOutputs({
 							errorMessage: error.message,
-							errorCode: error.code
+							errorCode: ErrorCodes[error.code]
 						});
 						this.sendSignalOnOutput('error');
 					});
@@ -99,33 +159,37 @@ const LogIn = Noodl.defineNode({
 	name:'Log In',
 	color:'green',
 	inputs:{
-		username: {type: 'string', group: 'User Data'},
-		password: {type: 'string', group: 'User Data'},
+		username: {type: 'string', displayName: 'Username', group: 'User Data'},
+		password: {type: 'string', displayName: 'Password', group: 'User Data'},
 	},
 	outputs: {
-		success: {type: 'signal', group: 'success'},
-		error: {type: 'signal', group: 'error'},
-		errorMessage: {type: 'string', group: 'error'},
-		errorCode: {type: 'string', group: 'error'},
+		success: {type: 'signal', displayName: 'Success', group: 'Success'},
+		error: {type: 'signal', displayName: 'Error', group: 'Error'},
+		errorMessage: {type: 'string', displayName: 'Error Message', group: 'Error'},
+		errorCode: {type: 'string', displayName: 'Error Code', group: 'Error'},
 	},
 	signals: {
-		login() {
-			this.setOutputs({
-				errorMessage: "",
-				errorCode: ""
-			});
-
-			Parse.User.logIn(this.inputs.username, this.inputs.password).then(user => {
-				this.sendSignalOnOutput('success');
-				updateUserObject();
-			})
-			.catch(error => {
+		login: {
+			displayName: 'Log In',
+			group: 'Actions',
+			signal() {
 				this.setOutputs({
-					errorMessage: error.message,
-					errorCode: error.code
+					errorMessage: "",
+					errorCode: ""
 				});
-				this.sendSignalOnOutput('error');
-			});
+
+				Parse.User.logIn(this.inputs.username, this.inputs.password).then(user => {
+						this.sendSignalOnOutput('success');
+						updateUserObject();
+					})
+					.catch(error => {
+						this.setOutputs({
+							errorMessage: error.message,
+							errorCode: ErrorCodes[error.code]
+						});
+						this.sendSignalOnOutput('error');
+					});
+			}
 		}
 	},
 	changed:{
@@ -137,13 +201,13 @@ const LogIn = Noodl.defineNode({
 	}
 });
 
-const readOnlyUserProps = {
-	userId: {displayName: 'Id', type: 'string', group: 'Read only data'},
-	email: {type: 'string', group: 'Read only data'},
-	username: {type: 'string', group: 'Read only data'},
-	createdAt: {type: 'string', group: 'Read only data'},
-	updatedAt: {type: 'string', group: 'Read only data'},
-	authenticated: {type: 'boolean', group: 'Read only data'}
+const builtInUserProps = {
+	userId: {displayName: 'Id', type: 'string', group: 'User Data'},
+	email: {displayName: 'Email', type: 'string', group: 'User Data'},
+	username: {displayName: 'Username',type: 'string', group: 'User Credentials'},
+	createdAt: {displayName: 'Created At', type: 'string', group: 'User Data'},
+	updatedAt: {displayName: 'Updated At', type: 'string', group: 'User Data'},
+	authenticated: {displayName: 'Authenticated', type: 'boolean', group: 'User Data'}
 };
 
 const User = Noodl.defineNode({
@@ -152,7 +216,7 @@ const User = Noodl.defineNode({
 	color:'green',
 	initialize() {
 		this.onPropertyUpdated = ({name, value}) => {
-			if(readOnlyUserProps[name]) {
+			if(builtInUserProps[name]) {
 				const output = {};
 				output[name] = value;
 				this.setOutputs(output);
@@ -166,7 +230,7 @@ const User = Noodl.defineNode({
 		userObject.on('change', this.onPropertyUpdated);
 
 		const startValues = {};
-		for(const prop in readOnlyUserProps) {
+		for(const prop in builtInUserProps) {
 			startValues[prop] = userObject.get(prop);
 		}
 		this.setOutputs(startValues);
@@ -200,19 +264,37 @@ const User = Noodl.defineNode({
 	},
 	signals: {
 		store: {
-			displayName: 'Store',
+			displayName: 'Save',
+			group: 'Actions',
 			signal() {
 				const user = Parse.User.current();
 				if(!user) {
 					this.setOutputs({
-						errorMessage: "User not logged in"
+						errorMessage: "User not logged in",
+						errorCode: "NOT_INITIALIZED"
 					});
 					this.sendSignalOnOutput("error");
 					return;
 				}
 
 				for(const prop in this.valuesToStore) {
-					setCustomUserProperty(prop, this.valuesToStore[prop]);
+					setUserProperty(prop, this.valuesToStore[prop]);
+				}
+
+
+				if(this.inputs.email) {
+					//if email matches the username, change the username as well
+					if(user.get('username') === user.get('email') && !this.inputs.username) {
+						setUserProperty("username", this.inputs.email);
+					}
+
+					setUserProperty("email", this.inputs.email);
+				}
+				if(this.inputs.username) {
+					setUserProperty("username", this.inputs.username);
+				}
+				if(this.inputs.password) {
+					user.set("password", this.inputs.password);
 				}
 
 				user.save()
@@ -224,7 +306,7 @@ const User = Noodl.defineNode({
 						error => {
 							this.setOutputs({
 								errorMessage: error.message,
-								errorCode: error.code
+								errorCode: ErrorCodes[error.code]
 							});
 							this.sendSignalOnOutput('error');
 						}
@@ -237,14 +319,17 @@ const User = Noodl.defineNode({
 			type: { name: 'stringlist', allowEditOnly: true },
 			displayName: 'Custom User Data',
 			group: 'Custom User Data',
-		}
+		},
+		username: builtInUserProps.username,
+		password: {displayName: 'Password', type: 'string', group: 'User Credentials'},
+		email: builtInUserProps.email
 	},
 	outputs: {
-		...readOnlyUserProps,
-		stored: {type: 'signal', group: 'success'},
-		error: {type: 'signal', group: 'error'},
-		errorMessage: {type: 'string', group: 'error'},
-		errorCode: {type: 'string', group: 'error'},
+		...builtInUserProps,
+		stored: {displayName: 'Saved', type: 'signal', group: 'Success'},
+		error: {displayName: 'Error', type: 'signal', group: 'Error'},
+		errorMessage: {displayName: 'Error message', type: 'string', group: 'Error'},
+		errorCode: {displayName: 'Error code', type: 'string', group: 'Error'},
 	},
 	setup(context, graphModel) {
 		if (!context.editorConnection || !context.editorConnection.isRunningLocally()) {
@@ -290,6 +375,7 @@ const Logout = Noodl.defineNode({
 	signals: {
 		logout: {
 			displayName: 'Log Out',
+			group: 'Actions',
 			signal() {
 				Parse.User.logOut()
 					.then(() => {
@@ -299,7 +385,7 @@ const Logout = Noodl.defineNode({
 					.catch(error => {
 						this.setOutputs({
 							errorMessage: error.message,
-							errorCode: error.code
+							errorCode: ErrorCodes[error.code]
 						});
 						this.sendSignalOnOutput('error');
 					});
@@ -307,10 +393,10 @@ const Logout = Noodl.defineNode({
 		}
 	},
 	outputs: {
-		success: {type: 'signal', group: 'success'},
-		error: {type: 'signal', group: 'error'},
-		errorMessage: {type: 'string', group: 'error'},
-		errorCode: {type: 'string', group: 'error'},
+		success: {displayName: 'Success', type: 'signal', group: 'Success'},
+		error: {displayName: 'Error', type: 'signal', group: 'Error'},
+		errorMessage: {displayName: 'Error Message', type: 'string', group: 'Error'},
+		errorCode: {displayName: 'Error Code', type: 'string', group: 'Error'},
 	}
 });
 

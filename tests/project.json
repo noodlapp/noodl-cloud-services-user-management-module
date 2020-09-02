@@ -59,7 +59,7 @@
                                 "id": "79abfe7c-ba87-083f-fca6-1506551c8fa0",
                                 "type": "Web Router",
                                 "x": 20,
-                                "y": 46,
+                                "y": 82,
                                 "parameters": {
                                     "pages": "Sign Up,Login,Signed In",
                                     "pageComponent-Sign Up": "/Pages/Sign Up",
@@ -208,12 +208,6 @@
                         "toProperty": "Enabled"
                     },
                     {
-                        "fromId": "49741fe4-82c4-ff9c-3196-59edac79a21a",
-                        "fromProperty": "Text",
-                        "toId": "6059746b-51c8-5636-9b70-fab6ecb610b0",
-                        "toProperty": "skillLevel"
-                    },
-                    {
                         "fromId": "43d39bc5-fdaf-8bf3-fc45-46683a7e9519",
                         "fromProperty": "success",
                         "toId": "6059746b-51c8-5636-9b70-fab6ecb610b0",
@@ -224,6 +218,60 @@
                         "fromProperty": "stored",
                         "toId": "8429ec92-b64b-3ac1-4666-1d7c0ba2273b",
                         "toProperty": "Navigate"
+                    },
+                    {
+                        "fromId": "49741fe4-82c4-ff9c-3196-59edac79a21a",
+                        "fromProperty": "Text",
+                        "toId": "6059746b-51c8-5636-9b70-fab6ecb610b0",
+                        "toProperty": "skillLevel"
+                    },
+                    {
+                        "fromId": "93938376-c10f-ac80-af73-e2656c0a98e9",
+                        "fromProperty": "userId",
+                        "toId": "ee700cd1-2d41-20c9-b423-80c2350dbf4c",
+                        "toProperty": "value"
+                    },
+                    {
+                        "fromId": "93938376-c10f-ac80-af73-e2656c0a98e9",
+                        "fromProperty": "email",
+                        "toId": "ee700cd1-2d41-20c9-b423-80c2350dbf4c",
+                        "toProperty": "value"
+                    },
+                    {
+                        "fromId": "93938376-c10f-ac80-af73-e2656c0a98e9",
+                        "fromProperty": "createdAt",
+                        "toId": "ee700cd1-2d41-20c9-b423-80c2350dbf4c",
+                        "toProperty": "value"
+                    },
+                    {
+                        "fromId": "93938376-c10f-ac80-af73-e2656c0a98e9",
+                        "fromProperty": "authenticated",
+                        "toId": "ee700cd1-2d41-20c9-b423-80c2350dbf4c",
+                        "toProperty": "value"
+                    },
+                    {
+                        "fromId": "93938376-c10f-ac80-af73-e2656c0a98e9",
+                        "fromProperty": "Address",
+                        "toId": "ee700cd1-2d41-20c9-b423-80c2350dbf4c",
+                        "toProperty": "value"
+                    },
+                    {
+                        "fromId": "93938376-c10f-ac80-af73-e2656c0a98e9",
+                        "fromProperty": "Phone",
+                        "toId": "ee700cd1-2d41-20c9-b423-80c2350dbf4c",
+                        "toProperty": "value"
+                    },
+                    {
+                        "fromId": "aa1066a6-6ca7-67d2-4196-10787af28cce",
+                        "fromProperty": "state",
+                        "toId": "e6cf0965-3fc0-208a-48c8-9a4263e848ba",
+                        "toProperty": "Address"
+                    },
+                    {
+                        "fromId": "aa1066a6-6ca7-67d2-4196-10787af28cce",
+                        "fromProperty": "switchedToOn",
+                        "toId": "e6cf0965-3fc0-208a-48c8-9a4263e848ba",
+                        "toProperty": "store"
                     }
                 ],
                 "roots": [
@@ -433,8 +481,8 @@
                     {
                         "id": "43d39bc5-fdaf-8bf3-fc45-46683a7e9519",
                         "type": "Sign Up",
-                        "x": 549.3306062182661,
-                        "y": 483.50638765473894,
+                        "x": 559.3306062182661,
+                        "y": 461.50638765473894,
                         "parameters": {},
                         "ports": [],
                         "children": []
@@ -462,10 +510,41 @@
                     {
                         "id": "6059746b-51c8-5636-9b70-fab6ecb610b0",
                         "type": "User",
-                        "x": 867.0052306551418,
-                        "y": 487.2918434290291,
+                        "x": 888.0052306551418,
+                        "y": 514.2918434290291,
                         "parameters": {
                             "properties": "skillLevel"
+                        },
+                        "ports": [],
+                        "children": []
+                    },
+                    {
+                        "id": "93938376-c10f-ac80-af73-e2656c0a98e9",
+                        "type": "User",
+                        "x": 1568.6252334838066,
+                        "y": 919.9633865845203,
+                        "parameters": {
+                            "properties": "My Custom Property,Address,Phone"
+                        },
+                        "ports": [],
+                        "children": []
+                    },
+                    {
+                        "id": "ee700cd1-2d41-20c9-b423-80c2350dbf4c",
+                        "type": "String",
+                        "x": 2036.8600338818815,
+                        "y": 927.8804001178212,
+                        "parameters": {},
+                        "ports": [],
+                        "children": []
+                    },
+                    {
+                        "id": "e6cf0965-3fc0-208a-48c8-9a4263e848ba",
+                        "type": "User",
+                        "x": 1566.660249843509,
+                        "y": 790.070717354522,
+                        "parameters": {
+                            "properties": "My Custom Property,Address,Phone"
                         },
                         "ports": [],
                         "children": []
@@ -803,6 +882,60 @@
                         "fromProperty": "userId",
                         "toId": "c021a059-0c9a-9317-5b2a-ebb3ba8bba7c",
                         "toProperty": "Value"
+                    },
+                    {
+                        "fromId": "5c81d7dc-7b69-57a2-f05a-98c15cc38c28",
+                        "fromProperty": "Click",
+                        "toId": "a7f20287-88df-a334-39c2-bb73b6eee929",
+                        "toProperty": "store"
+                    },
+                    {
+                        "fromId": "c77eb60e-305f-6362-b5a4-f3ff80b35632",
+                        "fromProperty": "Click",
+                        "toId": "35973390-625a-7497-8305-92257d2d2e0f",
+                        "toProperty": "store"
+                    },
+                    {
+                        "fromId": "0bad96ed-3f0b-cdc1-f877-9367e3ba9ad4",
+                        "fromProperty": "Click",
+                        "toId": "a8916be6-3986-8853-af58-85bd9cf1a34d",
+                        "toProperty": "store"
+                    },
+                    {
+                        "fromId": "3c200ca0-9c44-b366-812c-c3569c14cf6d",
+                        "fromProperty": "Text",
+                        "toId": "a8916be6-3986-8853-af58-85bd9cf1a34d",
+                        "toProperty": "username"
+                    },
+                    {
+                        "fromId": "92476153-d277-b57f-a50a-c65697bf862b",
+                        "fromProperty": "Text",
+                        "toId": "a7f20287-88df-a334-39c2-bb73b6eee929",
+                        "toProperty": "password"
+                    },
+                    {
+                        "fromId": "e93b731d-7920-d5f2-d896-f647b42cb795",
+                        "fromProperty": "Text",
+                        "toId": "35973390-625a-7497-8305-92257d2d2e0f",
+                        "toProperty": "email"
+                    },
+                    {
+                        "fromId": "6aa94ea0-aa66-ad05-0375-1b3b245fa47c",
+                        "fromProperty": "username",
+                        "toId": "f7e98c97-52f3-2b13-c677-2f537e980dc1",
+                        "toProperty": "Value"
+                    },
+                    {
+                        "fromId": "a8916be6-3986-8853-af58-85bd9cf1a34d",
+                        "fromProperty": "error",
+                        "toId": "ad079cba-3ad5-b9fe-dd70-b13b08d821ed",
+                        "toProperty": "value"
+                    },
+                    {
+                        "fromId": "a8916be6-3986-8853-af58-85bd9cf1a34d",
+                        "fromProperty": "stored",
+                        "toId": "ad079cba-3ad5-b9fe-dd70-b13b08d821ed",
+                        "toProperty": "value"
                     }
                 ],
                 "roots": [
@@ -830,8 +963,8 @@
                             {
                                 "id": "6b0013a2-2c60-e6bb-efb1-34c2f2cb0429",
                                 "type": "/UI/Data Row",
-                                "x": 20,
-                                "y": 128,
+                                "x": 251,
+                                "y": 345,
                                 "parameters": {
                                     "Key": "Authenticated"
                                 },
@@ -839,10 +972,21 @@
                                 "children": []
                             },
                             {
+                                "id": "f7e98c97-52f3-2b13-c677-2f537e980dc1",
+                                "type": "/UI/Data Row",
+                                "x": 283.41698782123706,
+                                "y": 420.02719499456725,
+                                "parameters": {
+                                    "Key": "username"
+                                },
+                                "ports": [],
+                                "children": []
+                            },
+                            {
                                 "id": "ac117f81-a6e1-f04c-488f-a648c418b6e9",
                                 "type": "/UI/Data Row",
-                                "x": 20,
-                                "y": 128,
+                                "x": 251,
+                                "y": 427,
                                 "parameters": {
                                     "Key": "email"
                                 },
@@ -919,27 +1063,144 @@
                                 "children": []
                             },
                             {
-                                "id": "2801bb45-7254-a199-f7c4-9b1bc18f5853",
-                                "type": "/UI/Input Field",
-                                "x": 292.1452278292086,
-                                "y": 892.2293373806884,
+                                "id": "35a773d5-658a-5161-ff6c-e8281f93d414",
+                                "type": "Group",
+                                "x": 251,
+                                "y": 898,
                                 "parameters": {
-                                    "Label": "Edit Skill Level",
-                                    "Type": "number"
+                                    "flexDirection": "row"
                                 },
                                 "ports": [],
-                                "children": []
+                                "children": [
+                                    {
+                                        "id": "2801bb45-7254-a199-f7c4-9b1bc18f5853",
+                                        "type": "/UI/Input Field",
+                                        "x": 271,
+                                        "y": 944,
+                                        "parameters": {
+                                            "Label": "Edit Skill Level",
+                                            "Type": "number"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    },
+                                    {
+                                        "id": "2d622d7f-6dce-7faa-cd08-b065fe21451c",
+                                        "type": "/UI/Button",
+                                        "x": 271,
+                                        "y": 1026,
+                                        "parameters": {
+                                            "Text": "Save"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    }
+                                ]
                             },
                             {
-                                "id": "2d622d7f-6dce-7faa-cd08-b065fe21451c",
-                                "type": "/UI/Button",
-                                "x": 20,
-                                "y": 727,
+                                "id": "8c05d097-acff-f972-eeca-74cfe40c2bdc",
+                                "type": "Group",
+                                "x": 263.78317338682496,
+                                "y": 1100.7831733868252,
                                 "parameters": {
-                                    "Text": "Save"
+                                    "flexDirection": "row"
                                 },
                                 "ports": [],
-                                "children": []
+                                "children": [
+                                    {
+                                        "id": "3c200ca0-9c44-b366-812c-c3569c14cf6d",
+                                        "type": "/UI/Input Field",
+                                        "x": 20,
+                                        "y": 46,
+                                        "parameters": {
+                                            "Label": "Edit Username",
+                                            "Type": "text"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    },
+                                    {
+                                        "id": "0bad96ed-3f0b-cdc1-f877-9367e3ba9ad4",
+                                        "type": "/UI/Button",
+                                        "x": 271,
+                                        "y": 1026,
+                                        "parameters": {
+                                            "Text": "Save"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "0714f2c9-baf6-8ad3-6b8b-c93a2f489c81",
+                                "type": "Group",
+                                "x": 251,
+                                "y": 1318,
+                                "parameters": {
+                                    "flexDirection": "row"
+                                },
+                                "ports": [],
+                                "children": [
+                                    {
+                                        "id": "92476153-d277-b57f-a50a-c65697bf862b",
+                                        "type": "/UI/Input Field",
+                                        "x": 20,
+                                        "y": 46,
+                                        "parameters": {
+                                            "Label": "Edit Password",
+                                            "Type": "password"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    },
+                                    {
+                                        "id": "5c81d7dc-7b69-57a2-f05a-98c15cc38c28",
+                                        "type": "/UI/Button",
+                                        "x": 271,
+                                        "y": 1446,
+                                        "parameters": {
+                                            "Text": "Save"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "32c98384-a045-acd4-f6eb-9b808a9b7d47",
+                                "type": "Group",
+                                "x": 287.02540112782464,
+                                "y": 1522.998862374815,
+                                "parameters": {
+                                    "flexDirection": "row"
+                                },
+                                "ports": [],
+                                "children": [
+                                    {
+                                        "id": "e93b731d-7920-d5f2-d896-f647b42cb795",
+                                        "type": "/UI/Input Field",
+                                        "x": 20,
+                                        "y": 46,
+                                        "parameters": {
+                                            "Label": "Edit Email",
+                                            "Type": "email"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    },
+                                    {
+                                        "id": "c77eb60e-305f-6362-b5a4-f3ff80b35632",
+                                        "type": "/UI/Button",
+                                        "x": 271,
+                                        "y": 1446,
+                                        "parameters": {
+                                            "Text": "Save"
+                                        },
+                                        "ports": [],
+                                        "children": []
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -977,11 +1238,53 @@
                     {
                         "id": "4ae3faf0-72d7-94e6-1594-93f4e5f8f59c",
                         "type": "User",
-                        "x": 9.48618547985393,
-                        "y": 936.7331014952676,
+                        "x": 519.4752661442213,
+                        "y": 941.5443192373843,
                         "parameters": {
                             "properties": "skillLevel"
                         },
+                        "ports": [],
+                        "children": []
+                    },
+                    {
+                        "id": "a8916be6-3986-8853-af58-85bd9cf1a34d",
+                        "type": "User",
+                        "x": 547.0810362233418,
+                        "y": 1193.6738065981572,
+                        "parameters": {
+                            "properties": "skillLevel"
+                        },
+                        "ports": [],
+                        "children": []
+                    },
+                    {
+                        "id": "a7f20287-88df-a334-39c2-bb73b6eee929",
+                        "type": "User",
+                        "x": 593.9904092089795,
+                        "y": 1401.7589739447028,
+                        "parameters": {
+                            "properties": "skillLevel"
+                        },
+                        "ports": [],
+                        "children": []
+                    },
+                    {
+                        "id": "35973390-625a-7497-8305-92257d2d2e0f",
+                        "type": "User",
+                        "x": 573.4840018669333,
+                        "y": 1588.71576978658,
+                        "parameters": {
+                            "properties": "skillLevel"
+                        },
+                        "ports": [],
+                        "children": []
+                    },
+                    {
+                        "id": "ad079cba-3ad5-b9fe-dd70-b13b08d821ed",
+                        "type": "Boolean",
+                        "x": 774.1611975171381,
+                        "y": 1147.7238784897143,
+                        "parameters": {},
                         "ports": [],
                         "children": []
                     }
@@ -1036,12 +1339,6 @@
                         "toProperty": "on"
                     },
                     {
-                        "fromId": "e181325c-662f-5743-985c-ca585eca2362",
-                        "fromProperty": "success",
-                        "toId": "8e799e9f-ac59-6bd4-fa84-45ce3d9b6065",
-                        "toProperty": "on"
-                    },
-                    {
                         "fromId": "8e799e9f-ac59-6bd4-fa84-45ce3d9b6065",
                         "fromProperty": "state",
                         "toId": "c1f3a8aa-96b7-b7b4-5daf-eabefc610660",
@@ -1052,6 +1349,12 @@
                         "fromProperty": "Click",
                         "toId": "8e799e9f-ac59-6bd4-fa84-45ce3d9b6065",
                         "toProperty": "off"
+                    },
+                    {
+                        "fromId": "e181325c-662f-5743-985c-ca585eca2362",
+                        "fromProperty": "success",
+                        "toId": "8e799e9f-ac59-6bd4-fa84-45ce3d9b6065",
+                        "toProperty": "on"
                     }
                 ],
                 "roots": [
@@ -1210,8 +1513,8 @@
                     {
                         "id": "2533b6fd-b803-3504-2895-eb9d7374bd63",
                         "type": "WebRouterNavigate",
-                        "x": 849.7432917320499,
-                        "y": 606.7987346346737,
+                        "x": 874.7432917320499,
+                        "y": 593.7987346346737,
                         "parameters": {
                             "page": "Signed In"
                         },
@@ -1230,8 +1533,8 @@
                     {
                         "id": "8e799e9f-ac59-6bd4-fa84-45ce3d9b6065",
                         "type": "Switch",
-                        "x": 421.2807346649001,
-                        "y": 828.7223131992469,
+                        "x": 371.2807346649001,
+                        "y": 776.7223131992469,
                         "parameters": {
                             "onFromStart": true
                         },
