@@ -1,5 +1,5 @@
 {
-    "name": "Untitled",
+    "name": "User Management - Test",
     "components": [
         {
             "name": "/My tests",
@@ -170,12 +170,6 @@
                         "fromProperty": "Text",
                         "toId": "43d39bc5-fdaf-8bf3-fc45-46683a7e9519",
                         "toProperty": "email"
-                    },
-                    {
-                        "fromId": "ed4f3560-206f-6c5a-e458-3fd3e5b80954",
-                        "fromProperty": "Text",
-                        "toId": "43d39bc5-fdaf-8bf3-fc45-46683a7e9519",
-                        "toProperty": "username"
                     },
                     {
                         "fromId": "f2f6c4c2-597f-01aa-3b24-6096f429c311",
@@ -1469,6 +1463,42 @@
             "workspaceId": "noodl-dev",
             "endpoint": "https://cs2.noodlapp.com/noodl-dev/puznspzonm"
         },
-        "dbCollections": []
+        "dbCollections": [
+            {
+                "name": "test",
+                "type": "cloud",
+                "schema": {
+                    "properties": {
+                        "createdAt": {
+                            "type": "Date",
+                            "undeletable": true
+                        },
+                        "updatedAt": {
+                            "type": "Date",
+                            "undeletable": true
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Products",
+                "type": "cloud",
+                "schema": {
+                    "properties": {
+                        "createdAt": {
+                            "type": "Date",
+                            "undeletable": true
+                        },
+                        "updatedAt": {
+                            "type": "Date",
+                            "undeletable": true
+                        },
+                        "name": {
+                            "type": "String"
+                        }
+                    }
+                }
+            }
+        ]
     }
 }
