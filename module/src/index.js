@@ -45,7 +45,7 @@ function initializeParse(cloudservices) {
 }
 
 const SignUp = Noodl.defineNode({
-	category:'Backend',
+	category:'Cloud Services',
 	name:'Sign Up',
 	color:'green',
 	inputs:{
@@ -95,7 +95,7 @@ const SignUp = Noodl.defineNode({
 });
 
 const LogIn = Noodl.defineNode({
-	category:'Backend',
+	category:'Cloud Services',
 	name:'Log In',
 	color:'green',
 	inputs:{
@@ -147,7 +147,7 @@ const readOnlyUserProps = {
 };
 
 const User = Noodl.defineNode({
-	category:'Backend',
+	category:'Cloud Services',
 	name:'User',
 	color:'green',
 	initialize() {
