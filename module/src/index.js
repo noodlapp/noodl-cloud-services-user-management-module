@@ -86,8 +86,8 @@ function initializeParse(cloudservices) {
 		return;
 	}
 
-	const {endpoint, instanceId, workspaceId} = cloudservices;
-	Parse.initialize(`${workspaceId}-${instanceId}`);
+	const {endpoint, instanceId, workspaceId, appId} = cloudservices;
+	Parse.initialize(appId || `${workspaceId}-${instanceId}`);
 	Parse.serverURL = endpoint;
 
 	const user = Parse.User.current();
@@ -106,6 +106,7 @@ const SignUp = Noodl.defineNode({
 	category:'Cloud Services',
 	name:'Sign Up',
 	color:'green',
+	docs:'https://docs.noodl.net/#/modules/cloud-services-user-management/signup',
 	inputs:{
 		email: {type: 'string', displayName: 'Email', group: 'User Data'},
 		username: {type: 'string', displayName: 'Username', group: 'User Data'},
@@ -158,6 +159,7 @@ const LogIn = Noodl.defineNode({
 	category:'Cloud Services',
 	name:'Log In',
 	color:'green',
+	docs:'https://docs.noodl.net/#/modules/cloud-services-user-management/login',
 	inputs:{
 		username: {type: 'string', displayName: 'Username', group: 'User Data'},
 		password: {type: 'string', displayName: 'Password', group: 'User Data'},
@@ -214,6 +216,7 @@ const User = Noodl.defineNode({
 	category:'Cloud Services',
 	name:'User',
 	color:'green',
+	docs:'https://docs.noodl.net/#/modules/cloud-services-user-management/user',
 	initialize() {
 		this.onPropertyUpdated = ({name, value}) => {
 			if(builtInUserProps[name]) {
@@ -369,9 +372,10 @@ function updateUserPorts(nodeId, parameters, editorConnection) {
 }
 
 const Logout = Noodl.defineNode({
-	category:'Backend',
+	category:'Cloud Services',
 	name:'Log Out',
 	color:'green',
+	docs:'https://docs.noodl.net/#/modules/cloud-services-user-management/logout',
 	signals: {
 		logout: {
 			displayName: 'Log Out',
