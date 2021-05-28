@@ -257,12 +257,7 @@ const LogIn = Noodl.defineNode({
 			}
 		}
 	},
-	changed: {},
-	setup(context, graphModel) {
-		graphModel.on('editorImportComplete', () => {
-			initializeParse(Noodl.getMetaData().cloudservices);
-		});
-	}
+	changed: {}
 });
 
 const builtInUserProps = {
@@ -397,7 +392,6 @@ const User = Noodl.defineNode({
 				for (const prop in this.valuesToStore) {
 					setUserProperty(prop, this.valuesToStore[prop]);
 				}
-
 
 				if (this.inputs.email) {
 					//if email matches the username, change the username as well
@@ -569,6 +563,6 @@ Noodl.defineModule({
 		Logout
 	],
 	setup() {
-		//this is called once on startup
+		initializeParse(Noodl.getMetaData('cloudservices'));
 	}
 });
