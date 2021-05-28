@@ -1,5 +1,5 @@
 const Noodl = require('@noodl/noodl-sdk');
-const Parse = require('parse');
+import Parse from 'parse/dist/parse.min.js';
 
 const ErrorCodes = {
 	0: "OTHER_CAUSE",
